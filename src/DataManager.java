@@ -88,7 +88,7 @@ public class DataManager {
 
 
     public int getColumn(String column) throws Exception{
-        column = column.toLowerCase();
+        //column = column.toLowerCase();
         int found = -1;
 
         for (int i = 0; i < columns; i++) {

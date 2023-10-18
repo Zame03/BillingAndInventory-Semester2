@@ -19,12 +19,12 @@ public class App {
             option = scan.nextInt();
 
             if (option == 1) {
-                DataManager newEntry = new DataManager("files\\entry.csv");
+                DataManager newEntry = new DataManager("files/entry.csv");
                 newEntry(newEntry, scan);
 
             }
             else if (option == 2) {
-                DataManager products = new DataManager("files\\productos.csv");
+                DataManager products = new DataManager("files/productos.csv");
                 products.getData();
                 products.viewData();
 
@@ -60,8 +60,8 @@ public class App {
         int row = 0;
         String product_id = "";
 
-        DataManager products = new DataManager("files\\productos.csv");
-        column_id = products.getColumn("Product ID");
+        DataManager products = new DataManager("files/productos.csv");
+        column_id = products.getColumn("product id");
 
         while (true) {
             boolean found = false;

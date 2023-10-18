@@ -14,7 +14,7 @@ public class Start {
 
 
     public void LogIn() throws Exception{
-        String path = "files\\users.csv";
+        String path = "files/users.csv";
         DataManager users = new DataManager(path);
 
         String user = "", password = "";
@@ -24,8 +24,8 @@ public class Start {
 
         while (true) {
             System.out.println("Ingrese el nombre de usuario");
-            // user = scan.next();
-            user = "juanbedoya";
+            user = scan.next();
+            //user = "juanbedoya";
 
             if (user.toLowerCase().equals("salir")) {
                 System.exit(0);
@@ -41,8 +41,8 @@ public class Start {
 
         while (true) {
             System.out.println("Ingrese la contraseña");
-            // password = scan.next();
-            password = "pass2";
+            password = scan.next();
+            //password = "pass2";
 
             if (password.toLowerCase().equals("salir")) {
                 System.exit(0);
