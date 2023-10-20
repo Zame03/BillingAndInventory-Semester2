@@ -1,2 +1,3 @@
-Product ID,Product Name, Product Price, Quantity
- 
+Product ID,Product Name,Product Price,Quantity
+101,Laptop,999.99,null
+108,Mouse,162.5,null

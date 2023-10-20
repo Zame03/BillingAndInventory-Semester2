@@ -15,7 +15,7 @@ public class Start {
 
     public void LogIn() throws Exception{
         String path = "files/users.csv";
-        DataManager users = new DataManager(path);
+        CSVManager users = new CSVManager(path);
 
         String user = "", password = "";
         int tries = 2;
@@ -59,7 +59,7 @@ public class Start {
     }
 
 
-    private boolean verificator(DataManager users, String user) throws Exception{
+    private boolean verificator(CSVManager users, String user) throws Exception{
         boolean user_catch = false;
         int name_col = users.getColumn("username");
         int rows = users.rows;

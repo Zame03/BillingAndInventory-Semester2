@@ -7,103 +7,123 @@ public class App {
     public static void main(String[] args) throws Exception {
         Scanner scan = new Scanner(System.in);
 
-        Start user = new Start(scan);
-        user.LogIn();
+        String[] entry = {"hola", "adios", "bienvenido"};
 
-        int option = 0;
-        String error = "Valor fuera del rango, vuelve a intentar";
+        CSVManager trie = new CSVManager(2, 2);
+
+        for (int i = 0; i < trie.columns; i++) {
+            trie.modifyCell(0, i, entry[i]);
+        }
+
+
+        trie.newCol("bienvenido 26");
+        trie.saveData("files/trie.csv");
+
+       /*  Start user = new Start(scan);
+        user.LogIn(); */
+
+        // CSVManager entry = new CSVManager("files/entry.csv");
+        // CSVManager entry2 = new CSVManager("files/productos.c6*36sv");
+
+    //     String error = "Valor fuera del rango, vuelve a intentar", option;
         
 
-        while (true) {
-            System.out.println("\nSelecciona una opcion (Usuario: " + user.user_id + ")\n1.Nueva entrada\n2.Ver lista de productos\n3.Ver inventario\n4.Cerrar Sesion");
-            option = scan.nextInt();
+    //     while (true) {
+    //         System.out.println("\nSelecciona una opcion (Usuario: 0)\n1.Nueva entrada\n2.Ver lista de productos\n3.Ver inventario\n4.Cerrar Sesion");
+    //         option = scan.nextLine();
 
-            if (option == 1) {
-                DataManager newEntry = new DataManager("files/entry.csv");
-                newEntry(newEntry, scan);
+    //         if (option.equals("1")) {
+    //             CSVManager newEntry = new CSVManager   ("files/entry.csv");
+    //             newEntry(newEntry, scan);
 
-            }
-            else if (option == 2) {
-                DataManager products = new DataManager("files/productos.csv");
-                products.getData();
-                products.viewData();
+    //         }
+    //         else if (option.equals("2")) {
+    //             CSVManager products = new CSVManager("files/productos.csv");
+    //             products.viewData();
 
-                System.out.println("¿Quieres modificar datos? \n1.Si \n2.No");
-                option = scan.nextInt();
+    //             System.out.println("¿Quieres modificar datos? \n1.Si \n2.No");
+    //             option = scan.nextLine();
 
-                if (option == 1) {
-                    product(products, scan);
-                    continue;
-                }
-                else if (option == 2) {
-                    continue;
-                }
-                else {
-                    System.out.println(error);
-                }
-            }
-            else if (option == 3) {
+    //             if (option.equals("1")) {
+    //                 product(products, scan);
+    //                 continue;
+    //             }
+    //             else if (option.equals("2")) {
+    //                 continue;
+    //             }
+    //             else {
+    //                 System.out.println(error);
+    //             }
+    //         }
+    //         else if (option.equals("3")) {
               
-            }
-            else if (option == 4) {
-                user.LogIn();
-                continue;
-            }
-            else {
-                System.out.println(error);
-            }
-        }
-    }
+    //         }
+    //         else if (option.equals("4")) {
+    //             // user.LogIn();
+    //             continue;
+    //         }
+    //         else if (option.toLowerCase().equals("salir")) {
+    //             System.exit(0);
+    //         }
+    //         else {
+    //             System.out.println(error);
+    //         }
+    //     }
+    // }
 
-    public static void newEntry (DataManager entry, Scanner scan) throws Exception{
-        int column_id = 0;
-        int row = 0;
-        String product_id = "";
+    // public static void newEntry (CSVManager entry, Scanner scan) throws Exception {
+    //     int column_id = 0;
+    //     int row = 0;
+    //     String product_id = "";
 
-        DataManager products = new DataManager("files/productos.csv");
-        column_id = products.getColumn("product id");
+    //     CSVManager products = new CSVManager("files/productos.csv");
+    //     column_id = products.getColumn("product id");
 
-        while (true) {
-            boolean found = false;
-            System.out.println("Ingrese el codigo del producto que desea agregar: ");
-            product_id = scan.nextLine();
+    //     while (true) {
+    //         System.out.println("Ingrese el codigo del producto que desea agregar: ");
+    //         product_id = scan.nextLine();
 
-            if (product_id.equals("salir")) {
-                    break;
-                }
+    //         boolean found = false;
 
-            try {
-                Double.parseDouble(product_id);
-            }
-            catch (Exception e){
-                continue;
-            }
+    //         if (product_id.equals("salir")) {
+    //                 break;
+    //             }
 
-
-
-            for (int i = 0; i < products.rows; i++) {
-                if (product_id.equals(products.getData(i, column_id))) {
-                    row = i;
-                    found = true;
-                }
-            }
+    //         try {
+    //             Double.parseDouble(product_id);
+    //         }
+    //         catch (Exception e){
+    //             System.out.println("Error: " + product_id + " does not exist, retry");
+    //             continue;
+    //         }
 
 
-            if (found) {
-                entry.newRow();
 
-                for (int i = 0; i < products.columns; i++){
-                    entry.modifyData(entry.rows - 1, i, products.getData(row, i));
+    //         for (int i = 0; i < products.rows; i++) {
+    //             if (product_id.equals(products.getData(i, column_id))) {
+    //                 row = i;
+    //                 found = true;
+    //             }
+    //         }
+
+
+    //         if (found) {
+    //             entry.newRow();
+
+    //             for (int i = 0; i < products.columns; i++){
+    //                 entry.modifyCell(entry.rows - 1, i, products.getData(row, i));
                     
-                }
-                entry.saveData();
-            }
-        }
-
+    //             }
+    //             entry.saveData();
+    //         }
+    //         else {
+    //             System.out.println("Error: " + product_id + " does not exist, retry");
+    //         }
+    //     }
     }
 
 
-    public static void product (DataManager product, Scanner scan) throws Exception{
+    public static void product (CSVManager product, Scanner scan) throws Exception{
         String error = "Valor fuera del rango, vuelve a intentar", option;
         boolean dothis = true;
         
@@ -177,12 +197,11 @@ public class App {
                         break;
                     }
                     else if (confirmation.equals("y")) {
-                        product.modifyData(row, 1, option);
+                        product.modifyCell(row, 1, option);
                         System.out.println("Cambio realizado");
                         break;
                     }
                     else if (confirmation.equals("n")) {
-                        System.out.println("Cambio denegado, volviendo a intentar");
                         System.out.println("Cambio denegado, volviendo a intentar");
                         continue;
                     }
@@ -222,7 +241,7 @@ public class App {
                         break;
                     }
                     else if (confirmation.equals("y")) {
-                        product.modifyData(row, 2, option);
+                        product.modifyCell(row, 2, option);
                         System.out.println("Cambio realizado");
                         break;
                     }
@@ -244,14 +263,14 @@ public class App {
     }
 
 
-    public static void saveData(DataManager data, Scanner scan) throws IOException{
+    public static void saveData(CSVManager data, Scanner scan) throws IOException{
         String answer;
 
         System.out.println("Desea guardar los cambios al archivo? y/n");
         answer = scan.nextLine();
 
         if (answer.equals("y")) {
-            data.saveData();
+            data.saveData(data.filepath);
             System.out.println("Cambios guardados");
         }
         else if (answer.equals("n")) {

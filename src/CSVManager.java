@@ -5,12 +5,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Arrays;
 
-public class DataManager {
+public class CSVManager {
     int rows, columns;
     String filepath;
     String[][] data;
 
-    public DataManager(String path) {
+    public CSVManager(String path) {
         String line = "";
         int row = 0;
 
@@ -42,7 +42,7 @@ public class DataManager {
         getData();
     }
 
-    public DataManager(int row_num, int column_num) {
+    public CSVManager(int row_num, int column_num) {
         rows = row_num;
         columns = column_num;
 
@@ -107,7 +107,7 @@ public class DataManager {
     }
 
 
-    public void modifyData(int row, int column, String input) throws Exception {
+    public void modifyCell(int row, int column, String input) throws Exception {
         data[row][column] = input;
     }
 
@@ -130,6 +130,30 @@ public class DataManager {
         }
     }
 
+    public void newCol (String name) throws Exception {
+        String[][] temp = new String[rows][columns + 1];
+        
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
+                    temp[i][j] = data[i][j];
+            }
+        }
+
+        columns++;
+        data = new String[rows][columns];
+
+        for (int i = 0; i < columns; i++) {
+            data[0][i] = temp[0][i];
+        }
+        data[0][columns - 1] = name;
+
+        for (int i = 1; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
+                data[i][j] = temp[i][j];
+            }
+        }
+    }
+
     public void viewData() throws IOException {
         Arrays.stream(data).forEach((i) -> {
             Arrays.stream(i).forEach((j) -> System.out.print(j + " - "));
@@ -138,8 +162,8 @@ public class DataManager {
 
     }
 
-    public void saveData() throws IOException {
-        FileWriter fw = new FileWriter(filepath);
+    public void saveData(String path) throws IOException {
+        FileWriter fw = new FileWriter(path);
         String out = "";
 
         for (int i = 0; i < rows; i++) {
