@@ -4,19 +4,19 @@ public class App {
    
 
     public static void main(String[] args) throws Exception {
-        Scanner scan = new Scanner(System.in);
+        // Scanner scan = new Scanner(System.in);
 
-        String[] entry = {"hola", "adios", "bienvenido"};
+        // String[] entry = {"hola", "adios", "bienvenido"};
 
-        CSVManager trie = new CSVManager(2, 2);
+        // CSVManager trie = new CSVManager(2, 2);
 
-        for (int i = 0; i < trie.columns; i++) {
-            trie.modifyCell(0, i, entry[i]);
-        }
+        // for (int i = 0; i < trie.columns; i++) {
+        //     trie.modifyCell(0, i, entry[i]);
+        // }
 
 
-        trie.newCol("bienvenido 26");
-        trie.saveData("files/trie.csv");
+        // trie.newCol("bienvenido 26");
+        // trie.saveData("files/trie.csv");
 
        /*  Start user = new Start(scan);
         user.LogIn(); */

@@ -6,13 +6,13 @@ import java.io.IOException;
 import java.util.Arrays;
 
 public class CSVManager {
-    int rows, columns;
+    int filas, columnas;
     String filepath;
-    String[][] data;
+    String[][] datos;
 
     public CSVManager(String path) {
         String line = "";
-        int row = 0;
+        int fila = 0;
 
         try { 
             BufferedReader br = new BufferedReader(new FileReader(path));
@@ -22,7 +22,7 @@ public class CSVManager {
             br.reset();
 
             while(br.readLine() != null) {
-                row++;
+                fila++;
             }
 
             br.close();
@@ -35,18 +35,18 @@ public class CSVManager {
         }
 
         filepath = path;
-        rows = row;
-        columns = line.split(",").length;
-        data = new String[rows][columns];
+        filas = fila;
+        columnas = line.split(",").length;
+        datos = new String[filas][columnas];
 
         getData();
     }
 
     public CSVManager(int row_num, int column_num) {
-        rows = row_num;
-        columns = column_num;
+        filas = row_num;
+        columnas = column_num;
 
-        data = new String[rows][columns];
+        datos = new String[filas][columnas];
     }
 
 
@@ -59,8 +59,8 @@ public class CSVManager {
             while((line = br.readLine()) != null) {
                 String[] values = line.split(",");
                 
-                for (int j = 0; j < columns; j++) {
-                    data[i][j] = values[j];
+                for (int j = 0; j < columnas; j++) {
+                    datos[i][j] = values[j];
                 }
 
                 i++;
@@ -78,28 +78,28 @@ public class CSVManager {
             e.printStackTrace();
         }
 
-        return data;
+        return datos;
     }
 
 
-    public String getData(int row, int column) {
-        return data[row][column];
+    public String getData(int fila, int columna) {
+        return datos[fila][columna];
     }
 
 
-    public int getColumn(String column) throws Exception{
-        //column = column.toLowerCase();
+    public int getColumn(String columna) throws Exception{
+        //columna = columna.toLowerCase();
         int found = -1;
 
-        for (int i = 0; i < columns; i++) {
-            if (column.equals(data[0][i].toLowerCase())) {
+        for (int i = 0; i < columnas; i++) {
+            if (columna.equals(datos[0][i].toLowerCase())) {
                 found = i;
                 break;
             }
         }
 
         if (found == -1) {
-            throw new IllegalArgumentException("La columna no existe verifica su nombre " + column);
+            throw new IllegalArgumentException("La columna no existe verifica su nombre " + columna);
         }
         else {
             return found;
@@ -107,55 +107,55 @@ public class CSVManager {
     }
 
 
-    public void modifyCell(int row, int column, String input) throws Exception {
-        data[row][column] = input;
+    public void modifyCell(int fila, int columna, String input) throws Exception {
+        datos[fila][columna] = input;
     }
 
     public void newRow() throws Exception {
-        String[][] temp = new String[rows + 1][columns];
+        String[][] temp = new String[filas + 1][columnas];
         
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < columns; j++) {
-                    temp[i][j] = data[i][j];
+        for (int i = 0; i < filas; i++) {
+            for (int j = 0; j < columnas; j++) {
+                temp[i][j] = datos[i][j];
             }
         }
 
-        rows++;
-        data = new String[rows][columns];
+        filas++;
+        datos = new String[filas][columnas];
 
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < columns; j++) {
-                    data[i][j] = temp[i][j];
+        for (int i = 0; i < filas; i++) {
+            for (int j = 0; j < columnas; j++) {
+                datos[i][j] = temp[i][j];
             }
         }
     }
 
     public void newCol (String name) throws Exception {
-        String[][] temp = new String[rows][columns + 1];
+        String[][] temp = new String[filas][columnas + 1];
         
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < columns; j++) {
-                    temp[i][j] = data[i][j];
+        for (int i = 0; i < filas; i++) {
+            for (int j = 0; j < columnas; j++) {
+                temp[i][j] = datos[i][j];
             }
         }
 
-        columns++;
-        data = new String[rows][columns];
+        columnas++;
+        datos = new String[filas][columnas];
 
-        for (int i = 0; i < columns; i++) {
-            data[0][i] = temp[0][i];
+        for (int i = 0; i < columnas; i++) {
+            datos[0][i] = temp[0][i];
         }
-        data[0][columns - 1] = name;
+        datos[0][columnas - 1] = name;
 
-        for (int i = 1; i < rows; i++) {
-            for (int j = 0; j < columns; j++) {
-                data[i][j] = temp[i][j];
+        for (int i = 1; i < filas; i++) {
+            for (int j = 0; j < columnas; j++) {
+                datos[i][j] = temp[i][j];
             }
         }
     }
 
     public void viewData() throws IOException {
-        Arrays.stream(data).forEach((i) -> {
+        Arrays.stream(datos).forEach((i) -> {
             Arrays.stream(i).forEach((j) -> System.out.print(j + " - "));
             System.out.println();
         });
@@ -166,10 +166,10 @@ public class CSVManager {
         FileWriter fw = new FileWriter(path);
         String out = "";
 
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < columns; j++) {
-                out += data[i][j];
-                if (j < columns - 1) {
+        for (int i = 0; i < filas; i++) {
+            for (int j = 0; j < columnas; j++) {
+                out += datos[i][j];
+                if (j < columnas - 1) {
                     out += ",";
                 }
             }
