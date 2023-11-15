@@ -154,7 +154,7 @@ public class CSVManager {
         }
     }
 
-    public void viewData() throws IOException {
+    public void viewData() throws Exception {
         Arrays.stream(datos).forEach((i) -> {
             Arrays.stream(i).forEach((j) -> System.out.print(j + " - "));
             System.out.println();
@@ -162,7 +162,7 @@ public class CSVManager {
 
     }
 
-    public void saveData(String path) throws IOException {
+    public void saveData(String path) throws Exception {
         FileWriter fw = new FileWriter(path);
         String out = "";
 
