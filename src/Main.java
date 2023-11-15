@@ -63,6 +63,8 @@ public class Main {
 
         productos.viewData();
 
+        System.out.println("Vas a realizar la primera factura del dia");
+
         while (true) {
             CSVManager factura = new CSVManager("files/plantilla_factura.csv");
             num_factura++;
@@ -82,7 +84,7 @@ public class Main {
                     System.out.println("El valor total es: " + sumaventa);
 
                     while (true) {
-                        System.out.println("Ingrese el metodo de pago 1.Efectivo 2. Tarjeta: ");
+                        System.out.println("Ingrese el metodo de pago 1.Efectivo 2.Tarjeta: ");
                         tipoPago = Integer.parseInt(scan.nextLine());
 
                         if (tipoPago == 1) {
@@ -179,7 +181,7 @@ public class Main {
         productos.saveData(filepathProductos);
 
         System.out.println("El total de las ventas fue: " + totalventa);
-        System.out.println("La bonificacion del cajero es :" + bonificacion);
+        System.out.println("La bonificacion del cajero es: " + bonificacion);
 
     }
 }
